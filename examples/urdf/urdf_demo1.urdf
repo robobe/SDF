@@ -1,0 +1,8 @@
+<axis xyz="0.0 0.0 0.0"/>
+
+<color rgba="0.0 1.0 0.0 0.0"/>
+
+<robot name="robot_name">
+    <link rel="stylesheet" href=""/>
+    
+</robot>
