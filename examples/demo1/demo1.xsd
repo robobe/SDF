@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="sdf" type="sdfInfo"/>
+    <xs:element name="model" type="modelInfo"/>
+
+        <xs:complexType name="sdfInfo">
+            <xs:sequence>
+                <xs:element name="model" type="modelInfo" />
+            </xs:sequence>
+        </xs:complexType>
+
+
+        <xs:complexType name="modelInfo">
+            <xs:sequence>
+                <xs:element name="static" type="xs:boolean" />
+            </xs:sequence>
+        </xs:complexType>
+
+</xs:schema> 
