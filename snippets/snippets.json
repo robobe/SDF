@@ -1,0 +1,7 @@
+{
+	"sdf": {
+		"prefix": "sdf",
+		"body": "<sdf version=\"1.7\"></sdf>",
+		"description": "Insert sdf body"
+    }
+}

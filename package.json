@@ -6,14 +6,35 @@
 	"engines": {
 		"vscode": "^1.51.0"
 	},
+	"icon": "img/sdf.png",
 	"categories": [
-		"Other"
+		"Programming Languages",
+		"Snippets"
 	],
 	"activationEvents": [
 		"onCommand:sdf.helloWorld"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"languages": [
+            {
+                "id": "xml",
+                "aliases": [
+                    "sdf",
+                    "SDF"
+                ],
+                "extensions": [
+                    ".sdf",
+                    ".sdf.mako"
+                ]
+            }
+        ],
+        "snippets": [
+            {
+                "language": "xml",
+                "path": "./snippets/snippets.json"
+            }
+        ],
 		"commands": [
 			{
 				"command": "sdf.helloWorld",
