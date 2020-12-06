@@ -1,19 +1,48 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xs:element name="sdf" type="sdfInfo"/>
-    <xs:element name="model" type="modelInfo"/>
+    <xs:element name="sdf" type="sdfInfo" />
+    <xs:element name="model" type="modelInfo" />
+    <xs:element name="link" type="linkInfo" />
+    <xs:element name="include" type="includeInfo" />
+    <xs:element name="pose" type="poseInfo" />
 
-        <xs:complexType name="sdfInfo">
-            <xs:sequence>
-                <xs:element name="model" type="modelInfo" />
-            </xs:sequence>
-        </xs:complexType>
+    <xs:complexType name="sdfInfo">
+        <xs:sequence>
+            <xs:element name="model" type="modelInfo" />
+        </xs:sequence>
+    </xs:complexType>
 
+    <xs:complexType name="modelInfo">
+        <xs:sequence >
+            <xs:element name="static" type="xs:boolean" maxOccurs="1"/>
+            <xs:element name="link" type="linkInfo" minOccurs="0"/>
+            <xs:element name="include" type="includeInfo" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="enable_wind" type="xs:boolean" use="optional"/>
+    </xs:complexType>
 
-        <xs:complexType name="modelInfo">
-            <xs:sequence>
-                <xs:element name="static" type="xs:boolean" />
-            </xs:sequence>
-        </xs:complexType>
+    <xs:complexType name="linkInfo">
+        <xs:sequence>
+            <xs:element name="model" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
 
+    <xs:complexType name="poseInfo">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="relative_to" type="xs:string"/>
+            </xs:extension>
+            
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="includeInfo">
+        <xs:sequence>
+            <xs:element name="uri" type="xs:string" minOccurs="1"/>
+            <xs:element name="name" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="static" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="pose" type="poseInfo" minOccurs="0" default="0 0 0 0 0 0"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema> 

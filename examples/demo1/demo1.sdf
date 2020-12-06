@@ -1,7 +1,9 @@
-
-<sdf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="demo1.xsd">
-  <model>
-      <static>true</static>
-  </model>
+<sdf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="demo1.xsd">
+    <model name="m1">
+        <static>true</static>
+        <include>
+            <uri></uri>
+            <pose></pose>
+        </include>
+    </model>
 </sdf> 
