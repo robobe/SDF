@@ -51,7 +51,10 @@ class converter():
                     replace , value = self.__eval_text(v)
                     if replace:
                         e.setAttribute(k, value)
-
+            if e.nodeType == minidom.Node.TEXT_NODE:
+                if len(e.nodeValue.strip()) > 0:
+                    replace , value = self.__eval_text(e.nodeValue)
+                    e.nodeValue = value
             self.__recursively(e)
 
     def __subsitute(self):

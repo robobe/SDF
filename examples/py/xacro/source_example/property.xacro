@@ -1,7 +1,11 @@
 <sdf xmlns:xacro="http://dd">
     <xacro:property name="width" value=".2" />
     <xacro:property name="bodylen" value=".6" />
+    <xacro:property name="x" value="1" />
+    <xacro:property name="y" value="2" />
+    <xacro:property name="z" value="3" />
     <link name="base_link">
+        <pose>${x} ${y} ${z} 0 0 0</pose>
         <visual>
             <geometry>
                 <cylinder radius="${2*width}" length="${bodylen}" />
