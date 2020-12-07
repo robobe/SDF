@@ -1,0 +1,19 @@
+<sdf xmlns:xacro="http://dd">
+    
+    
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder radius=".2" length=".6"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 .8 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius=".2" length=".6"/>
+            </geometry>
+        </collision>
+    </link>
+</sdf>
