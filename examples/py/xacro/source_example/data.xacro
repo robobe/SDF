@@ -1,0 +1,8 @@
+<sdf xmlns:xacro="http://dd">
+    <xacro:property name="name" value="aaaa" />
+    <xacro:property name="bodylen" value=".6" />
+    <xacro:property name="x" value="1" />
+    <xacro:property name="y" value="2" />
+    <xacro:property name="z" value="3" />
+    
+</sdf>

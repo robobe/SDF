@@ -1,0 +1,15 @@
+<sdf xmlns:xacro="http://dd">
+    <xacro:include uri="file://data.xacro"/>
+    <xacro:property name="width" value="100"/>
+    <xacro:macro name="m1" params="width bodylen">
+        <collision>
+            <geometry>
+                <cylinder radius="${width}" length="${bodylen}" />
+            </geometry>
+        </collision>
+    </xacro:macro>
+    <xacro:m1 width="right" bodylen="10" />
+    <model name="${name}">
+
+    </model>
+</sdf>

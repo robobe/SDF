@@ -1,0 +1,19 @@
+<sdf xmlns:xacro="http://dd">
+    <xacro:include uri="file://data.xacro"/>
+    <link name="base_link">
+        <pose>${x} ${y} ${z} 0 0 0</pose>
+        <visual>
+            <geometry>
+                <cylinder radius="${2*width}" length="${bodylen}" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 .8 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${width}" length="${bodylen}" />
+            </geometry>
+        </collision>
+    </link>
+</sdf>
