@@ -8,7 +8,7 @@
             </geometry>
         </collision>
     </xacro:macro>
-    <xacro:m1 width="right" bodylen="10" />
+    <xacro:m1 width="${width}" bodylen="10" />
     <model name="${name}">
 
     </model>

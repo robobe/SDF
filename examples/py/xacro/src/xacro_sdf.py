@@ -60,9 +60,9 @@ class converter():
     def __run_macro(self, node, cmd):
         kwargs = {}
         for k,v in node.attributes.items():
-            kwargs[k] = v
+            _, kwargs[k] = self.__eval_text(v)
         data = self.__macros[cmd](**kwargs)
-        _, data = self.__eval_text(data, kwargs)
+        _, data = try_convert_to_number(self.__eval_text(data, kwargs))
         parent = node.parentNode
         parent.removeChild(node)
         inner = minidom.parseString(data).documentElement
