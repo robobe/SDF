@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from types import FunctionType
 
 from xml.dom import minidom
@@ -18,7 +19,9 @@ class converter():
         self.__macros = {}
         self.__file_dir = ""
 
-    def run(self, input_file):
+    def run(self, input_file, output_file):
+        self.__output_file = output_file
+        # file_dir for relative include file
         self.__file_dir = os.path.dirname(input_file)
         self.__load(input_file, root=True)
         
@@ -110,19 +113,26 @@ class converter():
         return new_value!=value, new_value
 
     def __save(self):
-        dir_name = os.path.dirname(__file__)
-        file_name = os.path.join(dir_name, "../dest_sdf")
-        file_name = os.path.join(file_name, "property.sdf")
-        with (open(file_name, "w")) as f:
+        with (open(self.__output_file, "w")) as f:
             data = self.__root_doc.toxml()
             f.writelines(data)
 
 def main():
-    dir_name = os.path.dirname(__file__)
-    file_name = os.path.join(dir_name, "../source_example")
-    file_name = os.path.join(file_name, "macro.xacro")
-    con = converter()
-    con.run(file_name)
+    args_no = len(sys.argv)
+    if args_no >= 2:
+        inputfile = sys.argv[1]
+        outputfile = os.path.splitext(inputfile)[0]
+        if args_no == 3:
+            outputfile = sys.argv[2]
+        print(inputfile, outputfile)
+    else:
+        dir_name = os.path.dirname(__file__)
+        inputfile = os.path.join(dir_name, "../source_example")
+        inputfile = os.path.join(inputfile, "macro.sdf.xacro")
+        outputfile = os.path.join(dir_name, "../dest_sdf")
+        outputfile = os.path.join(outputfile, "model.sdf")
+        con = converter()
+        con.run(inputfile, outputfile)
 
 if __name__ == "__main__":
     main()
