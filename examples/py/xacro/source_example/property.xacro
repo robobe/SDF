@@ -4,7 +4,7 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <cylinder radius="${width}" length="${bodylen}" />
+                <cylinder radius="${2*width}" length="${bodylen}" />
             </geometry>
             <material name="blue">
                 <color rgba="0 0 .8 1" />

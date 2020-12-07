@@ -3,7 +3,11 @@ import re
 
 from xml.dom import minidom
 
-
+def try_convert_to_number(value):
+    try:
+        return float(value)
+    except:
+        return value
 
 class converter():
     def __init__(self, input_file):
@@ -23,7 +27,7 @@ class converter():
         for node in elements:
             name = node.getAttribute("name")
             value = node.getAttribute("value")
-            self.__properties[name] = value
+            self.__properties[name] = try_convert_to_number(value)
             parent = node.parentNode
             parent.removeChild(node)
 
@@ -31,8 +35,8 @@ class converter():
 
     def __sub_txt(self, obj):
         key = obj.group(1)
-        if key in self.__properties:
-            return self.__properties[key]
+        data = eval(key, self.__properties)
+        return str(data)
         
 
     def __eval_text(self, value):
