@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<sdf xmlns:xacro="http://dd">
+<xacro:macro name="inertia_box" params="m x y z">
+    <mass>${m}</mass>
+    <inertia>
+        <ixx>${m*(y*y+z*z)/12}</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>${m*(x*x+z*z)/12}</iyy>
+        <iyz>0</iyz>
+        <izz>${m*(x*x+y*y)/12}</izz>
+    </inertia>
+</xacro:macro>
+</sdf>

@@ -64,21 +64,36 @@ class converter():
         kwargs = {}
         for k,v in node.attributes.items():
             _, kwargs[k] = self.__eval_text(v)
+        for k,v in kwargs.items():
+            kwargs[k] = try_convert_to_number(v)
         data = self.__macros[cmd](**kwargs)
         _, data = try_convert_to_number(self.__eval_text(data, kwargs))
         parent = node.parentNode
         parent.removeChild(node)
+        # add root tag for valid parse
+        data = "<macro>" + data  + "</macro>"
         inner = minidom.parseString(data).documentElement
-        parent.appendChild(inner)
+        for e in list(inner.childNodes):
+            if e.nodeType == minidom.Node.ELEMENT_NODE:
+                parent.appendChild(e)
+                
+        
 
-    def __load_macros(self, node):
-        name = node.getAttribute("name")
-        params = node.getAttribute("params")
+    def __inner_xml(self, node):
+        data = []
         for e in node.childNodes:
             if e.nodeType == minidom.Node.ELEMENT_NODE:
-                break
+                data.append(e.toxml())#.replace("\n", "").replace(" ",""))
+        result = "".join(data)
+        return result
+
+    def __load_macros(self, node):
+        self.__inner_xml(node)
+        name = node.getAttribute("name")
+        params = node.getAttribute("params")
+        
         params_list = (",".join(params.strip().split()))
-        f_body = e.toxml()
+        f_body = self.__inner_xml(node)
         f_func_string = f'def {name}({params_list}): return """{f_body}"""'
         f_code = compile(f_func_string, "<string>", "exec")
         f_func = FunctionType(f_code.co_consts[0], globals(), name)
