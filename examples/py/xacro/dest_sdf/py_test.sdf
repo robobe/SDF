@@ -1,0 +1,11 @@
+<sdf >
+    <!-- <xacro:include uri="file://data.xacro" />
+    <xacro:include uri="file://common.xacro" />
+    <xacro:property name="base_mass" value="100" /> -->
+    <xacro:python name="dsf">
+x = 4343
+u = 345
+return_values = x,u
+        
+    </xacro:python> 
+</sdf>

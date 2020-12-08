@@ -44,6 +44,10 @@ class converter():
                         self.__load_macros(e)
                     elif cmd == "property":
                         self.__load_properties(e)
+                    elif cmd == "python":
+                        print("inside py block") 
+                        self.__load_python(e)
+                        print("outside py block")
                     else:
                         self.__run_macro(e, cmd)
                 else:
@@ -55,7 +59,8 @@ class converter():
                 if len(e.nodeValue.strip()) > 0:
                     replace , value = self.__eval_text(e.nodeValue)
                     e.nodeValue = value
-
+            
+            #what does this mean? 
             if e.nodeType == minidom.Node.ELEMENT_NODE:
                 if "xacro:" not in e.tagName:
                     self.__run(e)
@@ -76,6 +81,7 @@ class converter():
         for e in list(inner.childNodes):
             if e.nodeType == minidom.Node.ELEMENT_NODE:
                 parent.appendChild(e)
+    
                 
         
 
@@ -100,6 +106,15 @@ class converter():
         self.__macros[name] = f_func
         parent = node.parentNode
         parent.removeChild(node)
+
+    def __load_python(self, node): 
+        # get node cdata
+        py_string = node.childNodes[0].data
+        py_code = compile(py_string, "<string>", "exec")
+        # dict storing all the local varibales generated inside the py_code
+        loc = {}
+        exec(py_code, globals(), loc)
+        print(loc['return_values'])
 
     def __load_includes(self, node):
         elements = node.getElementsByTagNameNS("http://dd", "include")
@@ -144,10 +159,10 @@ def main():
     else:
         dir_name = os.path.dirname(__file__)
         inputfile = os.path.join(dir_name, "../source_example")
-        inputfile = os.path.join(inputfile, "macro.sdf.xacro")
+        inputfile = os.path.join(inputfile, "py_test.sdf.xacro")
         outputfile = os.path.join(dir_name, "../dest_sdf")
-        outputfile = os.path.join(outputfile, "model.sdf")
-        outputfile = "/home/user/projects/gazebo/models/balancer2/model.sdf"
+        outputfile = os.path.join(outputfile, "py_test.sdf")
+        # outputfile = "/home/user/projects/gazebo/models/balancer2/model.sdf"
         con = converter()
         con.run(inputfile, outputfile)
 
