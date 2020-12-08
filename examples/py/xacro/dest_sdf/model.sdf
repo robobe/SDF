@@ -1,0 +1,13 @@
+<sdf xmlns:xacro="http://dd">
+    
+    
+    
+    
+    <model name="aaaa">
+
+    </model>
+<collision>
+            <geometry>
+                <cylinder radius="100.0" length="10"/>
+            </geometry>
+        </collision></sdf>
