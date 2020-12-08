@@ -1,0 +1,10 @@
+<sdf xmlns:xacro="http://dd">
+    <xacro:macro name="color" params="color_name">
+        <lighting>1</lighting>
+        <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/${color_name}</name>
+        </script>
+    </xacro:macro>
+
+</sdf>

@@ -11,4 +11,27 @@
         <izz>${m*(x*x+y*y)/12}</izz>
     </inertia>
 </xacro:macro>
+
+<!-- inertia_cylinder -->
+<xacro:macro name="inertia_cylinder" params="m r l">
+    <mass>${m}</mass>
+    <inertia>
+        <ixx>${m*(3*r*r+l*l)/12}</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>${m*(3*r*r+l*l)/12}</iyy>
+        <iyz>0</iyz>
+        <izz>${m*r*r/2}</izz>
+    </inertia>
+</xacro:macro>
+
+<!-- geometry_cylinder -->
+<xacro:macro name="geometry_cylinder" params="r l">
+    <geometry>
+        <cylinder>
+            <radius>${r}</radius>
+            <length>${l}</length>
+        </cylinder>
+    </geometry>
+</xacro:macro>
 </sdf>

@@ -1,14 +1,15 @@
-<sdf xmlns:xacro="http://dd">
+<sdf version="1.7" xmlns:xacro="http://dd">
     <xacro:include uri="file://data.xacro" />
     <xacro:include uri="file://common.xacro" />
-    <xacro:property name="base_mass" value="100" />
+    <xacro:include uri="file://color.xacro" />
+    <xacro:property name="base_mass2" value="100" />
     <model name='heavy_base'>
         <pose>0 0 0 0 0 0</pose>
         <link name="heavy_base_link">
             <!-- position the base such that the bottom touches the floor -->
             <pose>0 0 0.05 0 0 0</pose>
             <inertial>
-                <xacro:inertia_box m="100" x="2.2" y="1" z="0.1" />
+                <xacro:inertia_box m="${base_mass}" x="2.2" y="1" z="0.1" />
             </inertial>
             <!-- Same geometry as visual -->
             <collision name="heavy_base_collision">
@@ -31,6 +32,21 @@
                     <specular>0 0 1 1</specular>
                 </material>
             </visual>
+        </link>
+        <link name="wheel_left">
+            <pose>0 -0.5 0 1.5707 0 0</pose>
+            <inertial>
+                <xacro:inertia_cylinder m="${wheel_mass}" r="${wheel_r}" l="${wheel_l}" />
+            </inertial>
+            <visual name="wheel_left_visual">
+                <xacro:geometry_cylinder r="${wheel_r}" l="${wheel_l}"/>
+                <material>
+                    <xacro:color color_name="Red"/>
+                </material>
+            </visual>
+            <collision name="wheel_left_collision">
+                <xacro:geometry_cylinder r="${wheel_r}" l="${wheel_l}"/>
+            </collision>
         </link>
     </model>
 </sdf>

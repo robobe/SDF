@@ -130,6 +130,7 @@ class converter():
     def __save(self):
         with (open(self.__output_file, "w")) as f:
             data = self.__root_doc.toxml()
+            data = data.replace('xmlns:xacro="http://dd"', "")
             f.writelines(data)
 
 def main():
@@ -146,6 +147,7 @@ def main():
         inputfile = os.path.join(inputfile, "macro.sdf.xacro")
         outputfile = os.path.join(dir_name, "../dest_sdf")
         outputfile = os.path.join(outputfile, "model.sdf")
+        outputfile = "/home/user/projects/gazebo/models/balancer2/model.sdf"
         con = converter()
         con.run(inputfile, outputfile)
 
